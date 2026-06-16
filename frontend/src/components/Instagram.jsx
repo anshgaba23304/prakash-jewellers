@@ -1,6 +1,6 @@
 export default function Instagram({ reels, content }) {
-  const handle = content['instagram.handle'] || '@prakashjewellers'
-  const url = content['instagram.url'] || '#'
+  const handle = content['instagram.handle'] || '@prakash.jewellers_'
+  const url = content['instagram.url'] || 'https://www.instagram.com/prakash.jewellers_/'
 
   return (
     <section className="instagram" id="instagram">

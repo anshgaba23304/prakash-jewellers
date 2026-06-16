@@ -31,12 +31,15 @@ public class DataInitializer implements CommandLineRunner {
         this.siteContentRepository = siteContentRepository;
     }
 
+    private static final String INSTAGRAM_URL = "https://www.instagram.com/prakash.jewellers_/";
+
     @Override
     public void run(String... args) {
         seedRateConfig();
         seedPromises();
         seedReels();
         seedContent();
+        syncReelLinks();
     }
 
     private void seedRateConfig() {
@@ -73,15 +76,15 @@ public class DataInitializer implements CommandLineRunner {
         if (reelRepository.count() > 0) return;
         reelRepository.saveAll(List.of(
                 reel("For the one whose hands wrap us in warmth & selfless love",
-                        "https://www.instagram.com/prakashjewellers/",
+                        INSTAGRAM_URL,
                         "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=600&q=80&auto=format&fit=crop",
                         1),
                 reel("Bridal sets crafted to make every celebration unforgettable",
-                        "https://www.instagram.com/prakashjewellers/",
+                        INSTAGRAM_URL,
                         "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=600&q=80&auto=format&fit=crop",
                         2),
                 reel("Timeless gold that stays with you, always",
-                        "https://www.instagram.com/prakashjewellers/",
+                        INSTAGRAM_URL,
                         "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=600&q=80&auto=format&fit=crop",
                         3)
         ));
@@ -92,14 +95,28 @@ public class DataInitializer implements CommandLineRunner {
         putIfAbsent("brand.tagline", "JEWELLERS");
         putIfAbsent("hero.titleHi", "\u090f\u0915 \u0928\u093e\u092e, \u0935\u093f\u0936\u094d\u0935\u093e\u0938 \u0915\u093e");
         putIfAbsent("hero.subtitle", "BUILT ON TRUST SINCE 1999.");
-        putIfAbsent("instagram.handle", "@prakashjewellers");
-        putIfAbsent("instagram.url", "https://www.instagram.com/prakashjewellers/");
-        putIfAbsent("contact.phone", "+91 98765 43210");
-        putIfAbsent("contact.whatsapp", "919876543210");
+        put("instagram.handle", "@prakash.jewellers_");
+        put("instagram.url", INSTAGRAM_URL);
+        put("contact.phone", "+91-8279809028");
+        put("contact.whatsapp", "918279809028");
         putIfAbsent("contact.email", "customercare@prakashjewellers.com");
         putIfAbsent("store.name", "Prakash Jewellers");
-        putIfAbsent("store.address", "Shop No. 1, Main Bazaar Road, Civil Lines, Your City - 000000");
+        put("store.address", "Deoband 247554 Saharanpur U.P");
         putIfAbsent("store.hours", "10:00 AM to 8:00 PM on all days");
+    }
+
+    private void syncReelLinks() {
+        for (Reel reel : reelRepository.findAll()) {
+            reel.setPermalink(INSTAGRAM_URL);
+            reelRepository.save(reel);
+        }
+    }
+
+    private void put(String key, String value) {
+        SiteContent c = siteContentRepository.findById(key).orElseGet(SiteContent::new);
+        c.setKey(key);
+        c.setValue(value);
+        siteContentRepository.save(c);
     }
 
     private void putIfAbsent(String key, String value) {

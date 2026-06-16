@@ -12,13 +12,13 @@ const FALLBACK_CONTENT = {
   'brand.tagline': 'JEWELLERS',
   'hero.titleHi': 'एक नाम, विश्वास का',
   'hero.subtitle': 'BUILT ON TRUST SINCE 1999.',
-  'instagram.handle': '@prakashjewellers',
-  'instagram.url': 'https://www.instagram.com/prakashjewellers/',
-  'contact.phone': '+91 98765 43210',
-  'contact.whatsapp': '919876543210',
+  'instagram.handle': '@prakash.jewellers_',
+  'instagram.url': 'https://www.instagram.com/prakash.jewellers_/',
+  'contact.phone': '+91-8279809028',
+  'contact.whatsapp': '918279809028',
   'contact.email': 'customercare@prakashjewellers.com',
   'store.name': 'Prakash Jewellers',
-  'store.address': 'Shop No. 1, Main Bazaar Road, Civil Lines, Your City - 000000',
+  'store.address': 'Deoband 247554 Saharanpur U.P',
   'store.hours': '10:00 AM to 8:00 PM on all days',
 }
 
